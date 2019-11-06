@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <title>Zombie Hunter</title>
+        <link rel="stylesheet" type="text/css" href= "css/style.css">
+</head>
+    <body>
+        <h1 id = "score">
+        SCORE: 0
+        </h1>
+        
+        <div>
+            <img id="zombie" src="images/zombie1.png" onclick="clickHandler()">  
+        </div>
+
+        <p id = "final_score"></p>
+
+        <audio id = "gunsound" src = audio/gunsound.mp3></audio>
+
+        <div>
+            <input id = "quit" type ="button" value = "End Game" onclick = "endgame()">
+        </div>
+
+        <div>        
+                <!-- <button id = "restart" value= "Refresh Page" onClick="window.location.reload();"> -->
+                    <input id = "restart" type = "button" value = "Restart Game" onclick = "window.location.reload();">
+        </div>
+
+        <script>
+
+            // alert("Click the zombie to start the game!")
+
+            let width = window.innerWidth
+                document.documentElement.clientWidth
+                document.body.clientWidth;
+
+            let height = window.innerHeight
+                document.documentElement.clientHeight
+                document.body.clientHeight;
+
+            let count = 0
+
+            let zombie_motion;
+
+            function startmovement(){
+                zombie_motion = setInterval(backtozombie,2000)
+
+            }
+            
+            function stopmovement(){
+                clearInterval(zombie_motion)
+
+            }
+
+            function clickHandler(){
+                let audio = document.getElementById("gunsound");
+                audio.play();
+                document.getElementById("zombie").src = "images/kaboom.gif";
+                scorecounter()
+                setTimeout(backtozombie,100)
+                stopmovement()
+                startmovement()
+
+            }
+
+            function backtozombie(){
+                document.getElementById("zombie").src = "images/zombie1.png"
+                document.getElementById("zombie").style.position = "absolute";
+                document.getElementById("zombie").style.top = Math.floor(Math.random() * (height - 225)) + "px";
+                document.getElementById("zombie").style.left = Math.floor(Math.random() * (width - 250)) + "px";
+                
+            }                
+
+            function scorecounter(){
+                count += 1
+                document.getElementById("score").innerHTML = "SCORE:" + count
+                return count;
+                
+            }    
+
+
+            function endgame(){
+                document.getElementById("score").innerHTML = "SCORE: 0"
+                document.getElementById("final_score").innerHTML = "FINAL SCORE:" + count
+                document.getElementById("zombie").onclick ="false"
+                stopmovement()
+                
+            }
+
+            function restart(){
+                windows.location.reload();
+
+            }
+
+            
+
+            
+
+        </script>
+
+
+    </body>
+
+</html>
