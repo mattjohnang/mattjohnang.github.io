@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <script>
+        //part a
+
+        let number = prompt("Please put a number between 0 and 26");
+
+        let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+            'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+        let btn_amnt = parseInt(number)
+        console.log(btn_amnt)
+
+        function validation(thing) {
+
+            if (thing <= 26) {
+                button_maker(thing)
+
+            }
+
+            else {
+                alert("You must enter a number between 0 and 26")
+
+            }
+
+        }
+        function button_maker(num) {
+            for (i = 0; i <= num - 1; i++) {
+                let btn = document.createElement("BUTTON");
+                document.body.appendChild(btn);
+                btn.innerHTML = alphabet[i];
+                btn.onclick =
+                    function btn_log() {
+                        console.log("Button " + btn.innerHTML + " was clicked.")
+
+                    }
+
+            }
+
+        }
+
+        validation(btn_amnt)
+
+
+    </script>
+
+    <script>
+        // part b
+        
+        let food = new Myrecipe("Chicken Cacciatore", 2, ["cinnamon", "lettuce", "onion"]);
+
+        function Myrecipe(title, servings, ingredients) {
+            this.title = title;
+            this.servings = servings;
+            this.ingredients = ingredients
+        }
+
+        console.log(food)
+
+
+    </script>
+
+
+
+
+</body>
+
+
+
+</html>
