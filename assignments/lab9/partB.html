@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #color {
+            height: 5em;
+            width: 10em;
+            background-color: ye
+        }
+    </style>
+
+</head>
+
+<body>
+    <p>
+        How many buttons to create?
+    </p>
+    <input id="btns" type="text" value="">
+    <button id="add">Go!</button>
+
+
+    <script>
+
+        document.getElementById("add").onclick = clickHandler
+
+        function clickHandler() {
+            let val = parseInt(document.getElementById("btns").value);
+            if (val >= 5) {
+                if (val <= 100) {
+                    btn_constructor(val)
+
+                }
+                else {
+                    alert("Number must be greater than/equal to 5 or less than/equal to 100.")
+
+                }
+            }
+            else {
+                alert("Number must be greater than/equal to 5 or less than/equal to 100.")
+
+            }
+
+        }
+
+        let arrayButtons = [];
+
+        let bleft = 0;
+
+        let click = 1;
+
+        function move_left(num) {
+            if (num == 0) {
+                bleft = 0;
+                return bleft;
+
+            }
+            else {
+                bleft = bleft + 125
+                return bleft
+
+            }
+
+        }
+
+        function Button(color, width, height, top, left, order, id) {
+            this.order = order;
+            this.btn = document.createElement("BUTTON");
+            this.btn.style.backgroundColor = color;
+            this.btn.style.width = width;
+            this.btn.style.height = height;
+            this.btn.id = id
+            console.log(id)
+            this.btn.onclick = function () {
+                    if (click == arrayButtons.length) {
+                        alert("Excellent memory!")
+
+                    } else if(click == id + 1){
+                        click += 1
+
+                    }
+                    else{
+                        click = 1
+                        window.alert('WRONG ORDER!')
+                    }
+                }
+            
+            this.btn.style.position = "absolute";
+            document.body.appendChild(this.btn)
+            this.setLocation = function (top, left) {
+                this.btn.style.top = top;
+                this.btn.style.left = left;
+            }
+            this.setLocation(top, left);
+
+        }
+
+        function randomcolor() {
+            r = Math.floor(Math.random() * 255);
+            g = Math.floor(Math.random() * 255);
+            b = Math.floor(Math.random() * 255);
+            colors = 'rgb(' + r + ', ' + g + ', ' + b + ')'
+            return colors
+
+        }
+
+        function btn_constructor(amnt) {
+
+            let btn_amnt = document.getElementById("btns").value;
+            for (i = 0; i <= amnt - 1; i++) {
+                arrayButtons.push(new Button(randomcolor(), "120px", "60px", "100px", move_left(i) + "px", 0, i))
+            }
+            setTimeout(mover, 500)
+        }
+
+        function getWidth() {
+            let width = window.innerWidth - 120
+            return width
+
+        }
+
+        function getHeight(){
+            let height = window.innerHeight - 60
+            return height
+        }
+
+        setInterval(mover, 500)
+
+        function mover() {
+            let w = getWidth()
+            let h = getHeight()
+            for (i = 0; i <= arrayButtons.length - 1; i++) {
+                arrayButtons[i].setLocation(
+                    Math.floor(Math.random() * w) + "px",
+                    Math.floor(Math.random() * h) + "px"
+                )
+            }
+
+        }
+
+        setInterval(windowchanger, 1)
+
+    </script>
+
+
+</body>
+
+
+</html>
